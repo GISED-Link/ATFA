@@ -18,30 +18,13 @@
         </Menu>
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="5" />
+                <ColumnDefinition Width="4*" />
                 <ColumnDefinition Width="5" />
                 <ColumnDefinition Width="2*" />
-				<ColumnDefinition Width="5" />
-				<ColumnDefinition Width="1*" />
             </Grid.ColumnDefinitions>
-            <TreeView Grid.Column="0" MinWidth="40" Background="#FFCDCDCD">
-                <TreeViewItem Header="Animals">
-                    <TreeViewItem.Items>
-                        <DockPanel>
-                            <Image Source="data\fish.png"/>
-                            <TextBlock Margin="5" Foreground="Brown" FontSize="12">Fish</TextBlock>
-                        </DockPanel>
-                        <DockPanel>
-                            <Image Source="data\dog.png"/>
-                            <TextBlock Margin="5" Foreground="Brown" FontSize="12">Dog</TextBlock>
-                        </DockPanel>
-                        <DockPanel>
-                            <Image Source="data\cat.png"/>
-                            <TextBlock Margin="5" Foreground="Brown" FontSize="12">Cat</TextBlock>
-                        </DockPanel>
-                    </TreeViewItem.Items>
-                </TreeViewItem>
-            </TreeView>
+            <TreeView x:Name="ProjectManagerTv" Grid.Column="0" MinWidth="40" Background="#FFCDCDCD"/>
             <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch"/>
             <Grid Grid.Column="2">
                 <Grid.RowDefinitions>

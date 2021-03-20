@@ -30,6 +30,11 @@ namespace ATFA
         public MainWindow()
         {
             InitializeComponent();
+
+            var data_tv = new TreeViewItem();
+            data_tv.Header = "data";
+            Manager.Project_Explorer.PopulateTreeView(data_tv);
+            ProjectManagerTv.Items.Add(data_tv);
         }
 
         private void addNewElement(object sender, RoutedEventArgs e)
