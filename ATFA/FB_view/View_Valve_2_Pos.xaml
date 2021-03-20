@@ -1,0 +1,40 @@
+﻿<UserControl x:Class="ATFA.FB_view.View_Valve_2_Pos"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ATFA.FB_view"
+             mc:Ignorable="d">
+    <Grid x:Name="fb_bloc" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" MinWidth="80" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" MinWidth="80" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <Rectangle x:Name="rect"  Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="100" Fill="#FFCCCCCC" />
+        <Button x:Name="bp" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="100" Opacity="0" Panel.ZIndex="10"/>
+
+        <Rectangle Grid.Column="1" Stroke="Black" />
+
+        <TextBox x:Name="FbName" Text="Placeholder__label" Grid.Column="1" FontSize="20" VerticalAlignment="Center" 
+                        Margin="20,0,20,0" Background="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Center" Panel.ZIndex="20"
+                        HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <Label Content="FB__Valve__3__2__mono" Grid.Column="2" Grid.Row="0" FontSize="20" 
+			        VerticalAlignment="Top" HorizontalAlignment="Right" Margin="20,0,0,0"/>
+    </Grid>
+</UserControl>

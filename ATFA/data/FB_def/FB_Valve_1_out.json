@@ -1,0 +1,14 @@
+{
+  "InputD": [
+    "xIn",
+    "xSensorGS",
+    "xSensorAS"
+  ],
+  "OutputD": [
+    "xOut",
+    "xBusy",
+    "xError"
+  ],
+  "ParamFileName": "param_1",
+  "Label": "FB_Valve_1_out"
+}
