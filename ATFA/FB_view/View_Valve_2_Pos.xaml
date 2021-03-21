@@ -33,7 +33,7 @@
 
         <TextBox x:Name="FbName" Text="Placeholder__label" Grid.Column="1" FontSize="20" VerticalAlignment="Center" 
                         Margin="20,0,20,0" Background="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Center" Panel.ZIndex="20"
-                        HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                        HorizontalContentAlignment="Center" VerticalContentAlignment="Center" TextChanged="SaveNewName"/>
         <Label Content="FB__Valve__3__2__mono" Grid.Column="2" Grid.Row="0" FontSize="20" 
 			        VerticalAlignment="Top" HorizontalAlignment="Right" Margin="20,0,0,0"/>
     </Grid>

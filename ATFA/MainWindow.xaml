@@ -50,7 +50,7 @@
                     <StackPanel Grid.Column="1" Orientation="Horizontal">
                         <Button Content="+" Background="#FF33FF06" Width="60" Click="addNewElement" FontSize="36" />
                         <Button Content="-" Width="60" Click="removeElement" Background="#FFE2381D" FontSize="36" />
-                        <Button Width="60" Background="#FFFFCE27" />
+                        <Button Content="Save" Width="60" Background="#FFFFCE27" FontSize="20" Click="SaveFB" />
                         <Button Width="60" Background="#FFFFFF00" />
                     </StackPanel>
                 </Grid>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,8 +14,10 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
 namespace ATFA
 {
+
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
@@ -23,6 +26,7 @@ namespace ATFA
 
         int i = 0;
         int lastElement_id = -1;
+
 
         SolidColorBrush COLOR_GREY_UNSEL = new BrushConverter().ConvertFromString("#CCCCCC") as SolidColorBrush;
         SolidColorBrush COLOR_GREY_SEL = new BrushConverter().ConvertFromString("#AAAAAA") as SolidColorBrush;
@@ -85,7 +89,7 @@ namespace ATFA
                     fb_valve.rect.Fill = COLOR_GREY_SEL;
                     lastElement_id = fb_valve.GetId();
 
-                    fb_json.Text = fb_valve.ReadFBJson();
+                    fb_json.Text = fb_valve.ReadFBJson(Manager.Project_Explorer.PATH_FB);
                     param_json.Text = fb_valve.ReadParamJson();
                 }
             }
@@ -104,6 +108,25 @@ namespace ATFA
                 }
             }
             return null;
+        }
+
+        private void SaveFB(object sender, RoutedEventArgs e)
+        {
+            System.IO.DirectoryInfo di = new DirectoryInfo(Manager.Project_Explorer.PATH_FB);
+
+            foreach (FileInfo file in di.GetFiles())
+            {
+                file.Delete();
+            }
+            foreach (DirectoryInfo dir in di.GetDirectories())
+            {
+                dir.Delete(true);
+            }
+
+            foreach (FB_view.View_Valve_2_Pos fb in valveView.Children)
+            {
+                fb.Save(Manager.Project_Explorer.PATH_FB);
+            }
         }
     }
 }

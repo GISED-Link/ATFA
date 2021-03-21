@@ -13,7 +13,7 @@ namespace ATFA.FB_view
             // TODO should get default param 
             this.ParamFileName = "param_1";
             this.param_type = typeof(FB_class.FB_Param_Valve_2_Pos);
-            this.Label = "FB_Valve_1_out";
+            this.FB_Name = "FB_Valve_1_out";
             this.InputD.Add("xGoGS");
             this.InputD.Add("xGoAS");
             this.InputD.Add("xSensorGS");

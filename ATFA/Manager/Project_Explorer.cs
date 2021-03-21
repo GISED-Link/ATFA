@@ -10,8 +10,8 @@ namespace ATFA.Manager
 {
     class Project_Explorer
     {
-        private static string PATH_FB = "D:/Projets/wpf/ATFA/ATFA/data/FB_def";
-        private static string PATH_PARAM = "D:/Projets/wpf/ATFA/ATFA/data/FB_param";
+        public readonly static string PATH_FB = "D:/Projets/wpf/ATFA/ATFA/data/FB_def/";
+        private static string PATH_PARAM = "D:/Projets/wpf/ATFA/ATFA/data/FB_param/";
 
         private static List<FB_class.FB_Param_Valve_2_Pos> ParamFiles = new();
 
@@ -78,7 +78,7 @@ namespace ATFA.Manager
             {
                 if (item is Label)
                 {
-                    var fb = FB_view.View_Valve_2_Pos.Open(((Label)item).Content as string);
+                    var fb = FB_view.View_Valve_2_Pos.Open(PATH_FB, ((Label)item).Content as string);
 
                     if (null != fb)
                     {

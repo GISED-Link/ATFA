@@ -23,10 +23,8 @@ namespace ATFA.FB_view
     [JsonObject(MemberSerialization.OptIn)]
     public partial class View_Valve_2_Pos : UserControl
     {
-        const string pathname = "D:/Projets/wpf/ATFA/ATFA/data/FB_def/";
-
         [JsonProperty]
-        public string Label { get; set; }
+        public string FB_Name { get; set; }
 
         [JsonIgnore]
         private static int id_count = 0;
@@ -54,6 +52,8 @@ namespace ATFA.FB_view
 
         public void BuildView()
         {
+            FbName.Text = FB_Name;
+
             int row = 1;
             foreach (string input in this.InputD)
             {
@@ -114,18 +114,18 @@ namespace ATFA.FB_view
         /// Save in json format the class
         /// </summary>
         /// <returns>0 when success, -1 when failed</returns>
-        public int Save()
+        public int Save(string path_name)
         {
-            return Manager.Tool.SaveJSON(pathname, this.Label, this);
+            return Manager.Tool.SaveJSON(path_name, this.FB_Name, this);
         }
 
-        public static View_Valve_2_Pos Open(string name)
+        public static View_Valve_2_Pos Open(string path_name, string name)
         {
             View_Valve_2_Pos ret = null;
 
             try
             {
-                FileStream fs = File.Open(pathname + name, System.IO.FileMode.Open);
+                FileStream fs = File.Open(path_name + name, System.IO.FileMode.Open);
 
                 Byte[] json_data = new byte[fs.Length];
                 fs.Read(json_data, 0, json_data.Length);
@@ -134,7 +134,10 @@ namespace ATFA.FB_view
 
                 ret = JsonConvert.DeserializeObject<View_Valve_2_Pos>(input);
 
-                ret.BuildView();
+                if (ret != null)
+                { 
+                    ret.BuildView();
+                }
 
                 fs.Close();
             }
@@ -152,12 +155,12 @@ namespace ATFA.FB_view
             return "";
         }
 
-        public string ReadFBJson()
+        public string ReadFBJson(string path_name)
         {
             string ret = "";
             try
             {
-                FileStream fs = System.IO.File.Open(pathname + this.Label + ".json", System.IO.FileMode.Open);
+                FileStream fs = System.IO.File.Open(path_name + this.FB_Name + ".json", System.IO.FileMode.Open);
                 Byte[] json_data = new byte[fs.Length];
                 fs.Read(json_data, 0, json_data.Length);
 
@@ -176,6 +179,11 @@ namespace ATFA.FB_view
         public int GetId()
         {
             return this.id;
+        }
+
+        private void SaveNewName(object sender, TextChangedEventArgs e)
+        {
+            FB_Name = ((TextBox)sender).Text;
         }
     }
 }
