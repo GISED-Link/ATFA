@@ -33,5 +33,10 @@ namespace ATFA.Manager
 
             return ret;
         }
+
+        public static void Log(string text)
+        {
+            System.Diagnostics.Debug.WriteLine(text);
+        }
     }
 }
