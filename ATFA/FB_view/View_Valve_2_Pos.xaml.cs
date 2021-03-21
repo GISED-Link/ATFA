@@ -45,7 +45,7 @@ namespace ATFA.FB_view
 
         /// <value> Parameter of a FB_Valve_2_Pos</value>
         [JsonIgnore] 
-        public FB_class.FB_Param_Valve_2_Pos param;
+        public Type param_type;
 
         public View_Valve_2_Pos()
         {
@@ -62,7 +62,7 @@ namespace ATFA.FB_view
             }
 
             // we re-use row here to place the config at the last line of the input side
-            AddInOutView(new View_Param(this.param.Label), row, 1, View_InOut.Dir.Param);
+            AddInOutView(new View_Param("Parameter file"), row, 1, View_InOut.Dir.Param);
 
             row = 1;
             foreach (string output in this.OutputD)
@@ -82,22 +82,32 @@ namespace ATFA.FB_view
         ///                   is to invert the combobox and the View_InOut element</param>
         private void AddInOutView(View_InOut uc, int row, int col, View_InOut.Dir dir)
         {
-            var view_enum = new ComboBox();
+
+            if (View_InOut.Dir.Param == dir)
+            {
+                uc.entry_box = new ComboBox();
+                ((ComboBox)uc.entry_box).ItemsSource = Manager.Project_Explorer.GetParamList();
+            }
+            else
+            {
+                uc.entry_box = new TextBox();
+            }
+
+            if (View_InOut.Dir.Out == dir)
+            {
+                Grid.SetColumn(uc.entry_box, col + 1);
+            }
+            else
+            {
+                Grid.SetColumn(uc.entry_box, col - 1);
+            }
 
             fb_bloc.Children.Add(uc);
             Grid.SetRow(uc, row);
             Grid.SetColumn(uc, col);
 
-            fb_bloc.Children.Add(view_enum);
-            Grid.SetRow(view_enum, row);
-            if (View_InOut.Dir.Out == dir)
-            {
-                Grid.SetColumn(view_enum, col + 1);
-            }
-            else
-            {
-                Grid.SetColumn(view_enum, col - 1);
-            }
+            fb_bloc.Children.Add(uc.entry_box);
+            Grid.SetRow(uc.entry_box, row);
         }
 
         /// <summary>
@@ -109,13 +119,13 @@ namespace ATFA.FB_view
             return Manager.Tool.SaveJSON(pathname, this.Label, this);
         }
 
-        public View_Valve_2_Pos Open(string name)
+        public static View_Valve_2_Pos Open(string name)
         {
             View_Valve_2_Pos ret = null;
 
             try
             {
-                FileStream fs = File.Open(pathname + name + ".json", System.IO.FileMode.Open);
+                FileStream fs = File.Open(pathname + name, System.IO.FileMode.Open);
 
                 Byte[] json_data = new byte[fs.Length];
                 fs.Read(json_data, 0, json_data.Length);
@@ -123,6 +133,8 @@ namespace ATFA.FB_view
                 string input = Encoding.UTF8.GetString(json_data, 0, json_data.Length);
 
                 ret = JsonConvert.DeserializeObject<View_Valve_2_Pos>(input);
+
+                ret.BuildView();
 
                 fs.Close();
             }
@@ -136,7 +148,8 @@ namespace ATFA.FB_view
 
         public string ReadParamJson()
         {
-            return this.param.ReadParamJson();
+            // return this.param.ReadParamJson();
+            return "";
         }
 
         public string ReadFBJson()
@@ -158,11 +171,6 @@ namespace ATFA.FB_view
             }
 
             return ret;
-        }
-
-        public View_Valve_2_Pos Reload()
-        {
-            return this.Open(this.Label);
         }
 
         public int GetId()

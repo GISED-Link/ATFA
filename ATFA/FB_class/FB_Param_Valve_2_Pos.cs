@@ -53,6 +53,36 @@ namespace ATFA.FB_class
             Manager.Tool.SaveJSON(pathname, this.Label, this);
         }
 
+        public FB_Param_Valve_2_Pos()
+        {
+
+        }
+
+        public static FB_Param_Valve_2_Pos Open(string name)
+        {
+            FB_Param_Valve_2_Pos ret = null;
+
+            try
+            {
+                FileStream fs = File.Open(pathname + name, System.IO.FileMode.Open);
+
+                Byte[] json_data = new byte[fs.Length];
+                fs.Read(json_data, 0, json_data.Length);
+
+                string input = Encoding.UTF8.GetString(json_data, 0, json_data.Length);
+
+                ret = JsonConvert.DeserializeObject<FB_Param_Valve_2_Pos>(input);
+
+                fs.Close();
+            }
+            catch (IOException e)
+            {
+                System.Diagnostics.Debug.WriteLine(e.ToString());
+            }
+
+            return ret;
+        }
+
         public string ReadParamJson()
         {
             string ret = "";
@@ -80,5 +110,9 @@ namespace ATFA.FB_class
             System.IO.File.Delete(file_name);
         }
 
+        public override string ToString()
+        {
+            return this.Label;
+        }
     }
 }

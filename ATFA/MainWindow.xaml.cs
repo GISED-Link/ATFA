@@ -31,19 +31,28 @@ namespace ATFA
         {
             InitializeComponent();
 
-            var data_tv = new TreeViewItem();
-            data_tv.Header = "data";
-            Manager.Project_Explorer.PopulateTreeView(data_tv);
-            ProjectManagerTv.Items.Add(data_tv);
+            var param_tv = new TreeViewItem();
+            param_tv.Header = "Param files";
+            Manager.Project_Explorer.LoadParamFiles(param_tv);
+            ParamTv.Items.Add(param_tv);
+
+            foreach(var fb in Manager.Project_Explorer.GetFB_Files())
+            {
+                AddNewFB(fb);
+            }
+        }
+
+        private void AddNewFB(FB_view.View_Valve_2_Pos fb)
+        {
+            fb.bp.Click += new RoutedEventHandler(setSelectedElement);
+            i++;
+            valveView.Children.Add(fb);
         }
 
         private void addNewElement(object sender, RoutedEventArgs e)
         {
-            var valve_class = new FB_view.View_Valve_1_out();
-            valve_class.Save();
-            valve_class.bp.Click += new RoutedEventHandler(setSelectedElement);
-            i++;
-            valveView.Children.Add(valve_class);
+            var fb = new FB_view.View_Valve_1_out();
+            AddNewFB(fb);
         }
 
         private void removeElement(object sender, RoutedEventArgs e)
@@ -58,7 +67,7 @@ namespace ATFA
 
         private void setSelectedElement(object sender, RoutedEventArgs e)
         {
-            FB_view.View_Valve_1_out fb_valve = GetValveById(((FB_view.View_Valve_1_out)((Grid)((Button)sender).Parent).Parent).GetId());
+            FB_view.View_Valve_2_Pos fb_valve = GetValveById(((FB_view.View_Valve_2_Pos)((Grid)((Button)sender).Parent).Parent).GetId());
             if (null != fb_valve)
             {
                 if (fb_valve.GetId() == lastElement_id)
@@ -82,15 +91,15 @@ namespace ATFA
             }
         }
 
-        private FB_view.View_Valve_1_out GetValveById(int id)
+        private FB_view.View_Valve_2_Pos GetValveById(int id)
         {
             foreach(var valve in valveView.Children)
             {
-                if (valve is FB_view.View_Valve_1_out)
+                if (valve is FB_view.View_Valve_2_Pos)
                 {
-                    if (id == ((FB_view.View_Valve_1_out)valve).GetId())
+                    if (id == ((FB_view.View_Valve_2_Pos)valve).GetId())
                     {
-                        return valve as FB_view.View_Valve_1_out;
+                        return valve as FB_view.View_Valve_2_Pos;
                     }
                 }
             }

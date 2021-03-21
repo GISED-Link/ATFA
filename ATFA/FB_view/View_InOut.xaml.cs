@@ -27,6 +27,9 @@ namespace ATFA.FB_view
             Out,
             Max
         }
+
+        public UIElement entry_box;
+
         public View_InOut(string label)
         {
             InitializeComponent();
