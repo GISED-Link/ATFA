@@ -31,7 +31,6 @@ namespace ATFA.FB_view
 
             this.entry_box = new TextBox();
             ((TextBox)this.entry_box).TextChanged += SetLink;
-            ((TextBox)this.entry_box).Text = this.link_value;
         }
 
         public void SetLink(object sender, TextChangedEventArgs e)
