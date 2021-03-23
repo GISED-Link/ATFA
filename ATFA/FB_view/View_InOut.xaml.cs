@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,6 +19,7 @@ namespace ATFA.FB_view
     /// <summary>
     /// Logique d'interaction pour View_InOut.xaml
     /// </summary>
+    [JsonObject(MemberSerialization.OptIn)]
     public partial class View_InOut : UserControl
     {
         public enum Dir
@@ -28,12 +30,26 @@ namespace ATFA.FB_view
             Max
         }
 
+        [JsonIgnore]
         public UIElement entry_box;
+
+        [JsonProperty]
+        public string label;
+
+        [JsonProperty]
+        public string link_value;
 
         public View_InOut(string label)
         {
             InitializeComponent();
-            Text.Content = label;
+            InOutLabel.Content = label;
+            this.label = label;
+        }
+
+        public View_InOut()
+        {
+            InitializeComponent();
+            InOutLabel.Content = this.label;
         }
     }
 }

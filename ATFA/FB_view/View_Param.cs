@@ -10,7 +10,7 @@ using System.Windows.Shapes;
 
 namespace ATFA.FB_view
 {
-    class View_Param : View_InOut
+    public class View_Param : View_InOut
     {
         public View_Param(string label) : base(label)
         {
@@ -20,12 +20,20 @@ namespace ATFA.FB_view
 
             img_param.VerticalAlignment = VerticalAlignment.Center;
             img_param.HorizontalAlignment = HorizontalAlignment.Left;
-            this.Text.HorizontalAlignment = HorizontalAlignment.Left;
+            this.InOutLabel.HorizontalAlignment = HorizontalAlignment.Left;
 
             Grid.SetColumn(img_param, 0);
-            Grid.SetColumn(this.Text, 1);
+            Grid.SetColumn(this.InOutLabel, 1);
 
             InGrid.Children.Add(img_param);
+
+            this.entry_box = new ComboBox();
+            ((ComboBox)this.entry_box).SelectionChanged += SetLink;
+        }
+
+        public void SetLink(object sender, SelectionChangedEventArgs e)
+        {
+            this.link_value = ((FB_class.FB_Param_Valve_2_Pos)((ComboBox)sender).SelectedValue).Label;
         }
     }
 }

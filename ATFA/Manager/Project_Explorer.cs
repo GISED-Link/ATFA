@@ -20,6 +20,23 @@ namespace ATFA.Manager
             return ParamFiles;
         }
 
+        public static FB_class.FB_Param_Valve_2_Pos GetParamByName(string name)
+        {
+            FB_class.FB_Param_Valve_2_Pos ret = null;
+
+            foreach (FB_class.FB_Param_Valve_2_Pos param in ParamFiles)
+            {
+                if (0 == String.Compare(name, param.Label)
+                    && (name.Length == param.Label.Length))
+                {
+                    ret = param;
+                    break;
+                }
+            }
+
+            return ret;
+        }
+
         public static void LoadParamFiles(TreeViewItem root_tvi)
         {
             DirectoryInfo root = new DirectoryInfo(PATH_PARAM);

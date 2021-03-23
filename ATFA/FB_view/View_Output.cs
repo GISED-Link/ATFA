@@ -10,7 +10,7 @@ using System.Windows.Shapes;
 
 namespace ATFA.FB_view
 {
-    class View_Output : View_InOut
+    public class View_Output : View_InOut
     {
         public View_Output(string label) : base(label)
         {
@@ -21,12 +21,20 @@ namespace ATFA.FB_view
 
             rect.VerticalAlignment = VerticalAlignment.Center;
             rect.HorizontalAlignment = HorizontalAlignment.Right;
-            this.Text.HorizontalAlignment = HorizontalAlignment.Right;
+            this.InOutLabel.HorizontalAlignment = HorizontalAlignment.Right;
 
-            Grid.SetColumn(this.Text, 1);
+            Grid.SetColumn(this.InOutLabel, 1);
             Grid.SetColumn(rect, 2);
 
             InGrid.Children.Add(rect);
+
+            this.entry_box = new TextBox();
+            ((TextBox)this.entry_box).TextChanged += SetLink;
+        }
+
+        public void SetLink(object sender, TextChangedEventArgs e)
+        {
+            this.link_value = ((TextBox)sender).Text;
         }
     }
 }

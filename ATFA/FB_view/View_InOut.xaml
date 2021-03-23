@@ -17,7 +17,7 @@
         <Rectangle Grid.Column="0" Fill="Black" Width="25" Height="5" 
 				  VerticalAlignment="Center" />
         -->
-        <Label x:Name="Text" Content="Place holder input 1" Grid.Column="1"
+        <Label x:Name="InOutLabel" Content="Place holder input 1" Grid.Column="1"
 			   HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" />
     </Grid>
 </UserControl>

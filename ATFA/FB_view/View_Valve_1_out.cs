@@ -14,14 +14,14 @@ namespace ATFA.FB_view
             this.ParamFileName = "param_1";
             this.param_type = typeof(FB_class.FB_Param_Valve_2_Pos);
             this.FB_Name = "FB_Valve_1_out";
-            this.InputD.Add("xGoGS");
-            this.InputD.Add("xGoAS");
-            this.InputD.Add("xSensorGS");
-            this.InputD.Add("xSensorAS");
-            this.OutputD.Add("xOutGS");
-            this.OutputD.Add("xOutAS");
-            this.OutputD.Add("xBusy");
-            this.OutputD.Add("xError");
+            this.InputD.Add(new View_Input("xGoGS"));
+            this.InputD.Add(new View_Input("xGoAS"));
+            this.InputD.Add(new View_Input("xSensorGS"));
+            this.InputD.Add(new View_Input("xSensorAS"));
+            this.OutputD.Add(new View_Output("xOutGS"));
+            this.OutputD.Add(new View_Output("xOutAS"));
+            this.OutputD.Add(new View_Output("xBusy"));
+            this.OutputD.Add(new View_Output("xError"));
 
             // Must be called at the end of the configuration
             base.BuildView();

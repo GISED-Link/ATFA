@@ -12,6 +12,7 @@ namespace ATFA.FB_view
 {
     public class View_Input : View_InOut
     {
+
         public View_Input(string label) : base(label)
         {
             Rectangle rect = new();
@@ -21,12 +22,21 @@ namespace ATFA.FB_view
 
             rect.VerticalAlignment = VerticalAlignment.Center;
             rect.HorizontalAlignment = HorizontalAlignment.Left;
-            this.Text.HorizontalAlignment = HorizontalAlignment.Left;
+            this.InOutLabel.HorizontalAlignment = HorizontalAlignment.Left;
 
             Grid.SetColumn(rect, 0);
-            Grid.SetColumn(this.Text, 1);
+            Grid.SetColumn(this.InOutLabel, 1);
 
             InGrid.Children.Add(rect);
+
+            this.entry_box = new TextBox();
+            ((TextBox)this.entry_box).TextChanged += SetLink;
+            ((TextBox)this.entry_box).Text = this.link_value;
+        }
+
+        public void SetLink(object sender, TextChangedEventArgs e)
+        {
+            this.link_value = ((TextBox)sender).Text;
         }
     }
 }

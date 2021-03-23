@@ -23,20 +23,21 @@ namespace ATFA.FB_view
     [JsonObject(MemberSerialization.OptIn)]
     public partial class View_Valve_2_Pos : UserControl
     {
+
         [JsonProperty]
         public string FB_Name { get; set; }
 
         [JsonIgnore]
         private static int id_count = 0;
-        [JsonIgnore] 
+        [JsonIgnore]
         public int id = id_count++;
 
         /// <value> input direct list </value>
         [JsonProperty]
-        public List<string> InputD = new();
+        public List<View_Input> InputD = new();
         /// <value> output direct list </value>
         [JsonProperty]
-        public List<string> OutputD = new();
+        public List<View_Output> OutputD = new();
 
         [JsonProperty]
         public string ParamFileName = "";
@@ -55,19 +56,23 @@ namespace ATFA.FB_view
             FbName.Text = FB_Name;
 
             int row = 1;
-            foreach (string input in this.InputD)
+            foreach (View_Input input in this.InputD)
             {
-                AddInOutView(new View_Input(input), row, 1, View_InOut.Dir.In);
+                AddInOutView(input, row, 1, View_InOut.Dir.In);
+                ((TextBox)input.entry_box).Text = input.link_value;
                 row++;
             }
-
             // we re-use row here to place the config at the last line of the input side
-            AddInOutView(new View_Param("Parameter file"), row, 1, View_InOut.Dir.Param);
+            View_Param viewParam = new ("Parameter file");
+            AddInOutView(viewParam, row, 1, View_InOut.Dir.Param);
+            ((ComboBox)viewParam.entry_box).ItemsSource = Manager.Project_Explorer.GetParamList();
+            ((ComboBox)viewParam.entry_box).SelectedItem = Manager.Project_Explorer.GetParamByName(ParamFileName);
 
             row = 1;
-            foreach (string output in this.OutputD)
+            foreach (View_Output output in this.OutputD)
             {
-                AddInOutView(new View_Output(output), row, 2, View_InOut.Dir.Out);
+                AddInOutView(output, row, 2, View_InOut.Dir.Out);
+                ((TextBox)output.entry_box).Text = output.link_value;
                 row++;
             }
         }
@@ -82,17 +87,6 @@ namespace ATFA.FB_view
         ///                   is to invert the combobox and the View_InOut element</param>
         private void AddInOutView(View_InOut uc, int row, int col, View_InOut.Dir dir)
         {
-
-            if (View_InOut.Dir.Param == dir)
-            {
-                uc.entry_box = new ComboBox();
-                ((ComboBox)uc.entry_box).ItemsSource = Manager.Project_Explorer.GetParamList();
-            }
-            else
-            {
-                uc.entry_box = new TextBox();
-            }
-
             if (View_InOut.Dir.Out == dir)
             {
                 Grid.SetColumn(uc.entry_box, col + 1);
