@@ -7,7 +7,7 @@ The goal of this software is to create a set of tools to create PLC code automat
 why not add parameters to the template to automaticaly generates the proper code for us?
 
 This will reduce coding time, increase proper code formatting and finally we will be able to work together on the same project.
-It also will force people to use the same code convention since they will not write the code anymore :thumbs_up:
+It also will force people to use the same code convention since they will not write the code anymore :thumbsup:
 
 This software will generates for you:
   - All the neccessary instances of FB's you need to control the machine, each FB's with its own or share constant parameter
